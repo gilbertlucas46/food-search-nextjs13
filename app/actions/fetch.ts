@@ -1,22 +1,28 @@
 // app/actions/fetch-foods.ts
 "use strict";
 import { Food } from "@/types/index";
+interface UseQueryOptions {
+  apiUrl?: string;
+  page?: number;
+  perPage?: number;
+  query?: string;
+}
 
-export async function fetchFoods(
-  page: number,
-  perPage: number,
-  restaurantSearch?: string
+export async function useQuery(
+  options: UseQueryOptions = {}
 ): Promise<Food[] | null> {
-  const apiUrl = "https://run.mocky.io/v3/c75dc0d8-ad78-4b3d-b697-807a5ded8645";
+  const { apiUrl, page = 1, perPage = 10, query } = options;
 
   try {
-    const response = await fetch(apiUrl);
+    const response = await fetch(apiUrl as string, {
+      next: { revalidate: 10 },
+    });
     const data: { foods: Food[] } = await response.json();
 
     // Apply case-insensitive partial match for restaurant name
-    const filteredFoods = restaurantSearch
+    const filteredFoods = query
       ? data.foods.filter((food) =>
-          food.restaurant.toLowerCase().includes(restaurantSearch.toLowerCase())
+          food.restaurant.toLowerCase().includes(query.toLowerCase())
         )
       : data.foods;
 

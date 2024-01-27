@@ -1,10 +1,14 @@
 import Image from "next/image";
 import styles from "@/styles/page.module.css";
-import { fetchFoods } from "./actions/fetch-foods";
+import { useQuery } from "./actions/fetch";
 
 export default async function Home() {
-  const foods = await fetchFoods(1, 10, "eve");
-  console.log(foods, "=========================");
+  const filteredFoods = await useQuery({
+    apiUrl: "https://run.mocky.io/v3/c75dc0d8-ad78-4b3d-b697-807a5ded8645",
+    page: 2,
+    perPage: 9,
+    query: "p",
+  });
   return (
     <>
       <main className={styles.main}>
