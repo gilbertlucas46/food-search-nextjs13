@@ -46,7 +46,7 @@ const CardContentLabel = React.forwardRef<
 >(({ className, ...props }, ref) => (
   <div
     ref={ref}
-    className={`${styles["card__label"]} ${className}`}
+    className={`${styles["card__label"]} ${className ? className : ""}`}
     {...props}
   />
 ));
@@ -58,7 +58,7 @@ const CardContentLabelList = React.forwardRef<
 >(({ className, ...props }, ref) => (
   <div
     ref={ref}
-    className={`${styles["card__labels"]} ${className}`}
+    className={`${styles["card__labels"]}  ${className ? className : ""}`}
     {...props}
   />
 ));
@@ -70,7 +70,7 @@ const CardContentPromotion = React.forwardRef<
 >(({ className, ...props }, ref) => (
   <div
     ref={ref}
-    className={`${styles["card__promotion"]} ${className}`}
+    className={`${styles["card__promotion"]}  ${className ? className : ""}`}
     {...props}
   />
 ));

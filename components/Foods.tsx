@@ -35,6 +35,18 @@ const Foods = ({ foods }: FoodProps) => {
           } = food;
           const cookTime = `${minCookTime}-${maxCookTime}`;
           const newRating = rating.toFixed(1);
+          const promotionClass = () => {
+            switch (promotion) {
+              case "gift":
+                return promotion;
+              case "1+1":
+                return "onePlusOne";
+              case "discount":
+                return "%";
+              default:
+                return "";
+            }
+          };
           return (
             <Card key={food.id}>
               <CardContent>
@@ -47,7 +59,9 @@ const Foods = ({ foods }: FoodProps) => {
                   />
                 </CardContentImage>
                 {promotion !== null && (
-                  <CardContentPromotion>
+                  <CardContentPromotion
+                    className={styles[`card__promotion--${promotionClass()}`]}
+                  >
                     {promotion === "gift" ? <BsFillGiftFill /> : promotion}
                   </CardContentPromotion>
                 )}
