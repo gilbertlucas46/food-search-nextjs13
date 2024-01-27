@@ -9,7 +9,7 @@ export interface FoodProps {
 
 const Foods = ({ foods }: FoodProps) => {
   return (
-    <>
+    <div className={styles["cards__wrapper"]}>
       {foods ? (
         foods.map((food) => (
           <Card key={food.id}>
@@ -24,7 +24,7 @@ const Foods = ({ foods }: FoodProps) => {
       ) : (
         <div>no food</div>
       )}
-    </>
+    </div>
   );
 };
 

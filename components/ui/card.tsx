@@ -4,7 +4,7 @@ const Card = React.forwardRef<
   HTMLDivElement,
   React.HTMLAttributes<HTMLDivElement>
 >(({ className, ...props }, ref) => (
-  <div ref={ref} {...props} className={styles.cardWrapper} />
+  <div ref={ref} {...props} className={styles["card__item"]} />
 ));
 Card.displayName = "Card";
 
@@ -28,7 +28,7 @@ const CardContent = React.forwardRef<
   HTMLDivElement,
   React.HTMLAttributes<HTMLDivElement>
 >(({ className, ...props }, ref) => (
-  <div ref={ref} className={styles["cardContent"]} {...props} />
+  <div ref={ref} className={styles["card__content"]} {...props} />
 ));
 CardContent.displayName = "CardContent";
 
@@ -36,7 +36,7 @@ const CardFooter = React.forwardRef<
   HTMLDivElement,
   React.HTMLAttributes<HTMLDivElement>
 >(({ className, ...props }, ref) => (
-  <div ref={ref} className={styles["CardFooter"]} {...props} />
+  <div ref={ref} className={styles["card__footer"]} {...props} />
 ));
 CardFooter.displayName = "CardFooter";
 
