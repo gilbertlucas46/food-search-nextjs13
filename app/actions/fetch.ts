@@ -1,5 +1,5 @@
-// app/actions/fetch-foods.ts
-"use strict";
+"use server";
+
 import { Food } from "@/types/index";
 interface UseQueryOptions {
   apiUrl?: string;
