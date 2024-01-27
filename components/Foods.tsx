@@ -10,6 +10,7 @@ import {
 } from "@/components/ui/Card";
 import styles from "@/styles/card.module.scss";
 import { BsFillGiftFill } from "react-icons/bs";
+import Image from "next/image";
 
 export interface FoodProps {
   foods: Food[] | null;
@@ -24,9 +25,11 @@ const Foods = ({ foods }: FoodProps) => {
             <Card key={food.id}>
               <CardContent>
                 <CardContentImage>
-                  <img
+                  <Image
                     src={food.imageUrl.replace("400x400", "294x178")}
                     alt={food.name}
+                    width={294}
+                    height={178}
                   />
                 </CardContentImage>
                 {food.promotion !== null && (
