@@ -15,9 +15,25 @@ import { BsFillGiftFill } from "react-icons/bs";
 import Image from "next/image";
 import { FaStar } from "react-icons/fa";
 
+interface PromotionConfig {
+  icon: React.ReactNode | null;
+  content: string;
+  cssClass: string;
+}
 export interface FoodProps {
   foods: Food[] | null;
 }
+
+const getPromotionConfig = (promotion: string): PromotionConfig => {
+  const promotions: Record<string, PromotionConfig> = {
+    gift: { icon: <BsFillGiftFill />, content: "gift", cssClass: "gift" },
+    "1+1": { icon: null, content: "1+1", cssClass: "onePlusOne" },
+    discount: { icon: null, content: "%", cssClass: "discount" },
+    default: { icon: null, content: "", cssClass: "" },
+  };
+
+  return promotions[promotion] || promotions.default;
+};
 
 const Foods = ({ foods }: FoodProps) => {
   return (
@@ -35,18 +51,8 @@ const Foods = ({ foods }: FoodProps) => {
           } = food;
           const cookTime = `${minCookTime}-${maxCookTime}`;
           const newRating = rating.toFixed(1);
-          const promotionClass = () => {
-            switch (promotion) {
-              case "gift":
-                return promotion;
-              case "1+1":
-                return "onePlusOne";
-              case "discount":
-                return "%";
-              default:
-                return "";
-            }
-          };
+          const { icon, content, cssClass } = getPromotionConfig(promotion);
+
           return (
             <Card key={food.id}>
               <CardContent>
@@ -60,9 +66,9 @@ const Foods = ({ foods }: FoodProps) => {
                 </CardContentImage>
                 {promotion !== null && (
                   <CardContentPromotion
-                    className={styles[`card__promotion--${promotionClass()}`]}
+                    className={styles[`card__promotion--${cssClass}`]}
                   >
-                    {promotion === "gift" ? <BsFillGiftFill /> : promotion}
+                    {icon ?? content}
                   </CardContentPromotion>
                 )}
               </CardContent>
