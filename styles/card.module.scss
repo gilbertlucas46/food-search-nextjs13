@@ -1,0 +1,6 @@
+.card {
+    &__item {
+        border-radius: var(--borderRadius);
+        overflow: hidden;
+    }
+}
