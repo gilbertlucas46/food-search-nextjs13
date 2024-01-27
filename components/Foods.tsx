@@ -14,6 +14,7 @@ import styles from "@/styles/card.module.scss";
 import { BsFillGiftFill } from "react-icons/bs";
 import Image from "next/image";
 import { FaStar } from "react-icons/fa";
+import Spinner from "./ui/Spinner";
 
 interface PromotionConfig {
   icon: React.ReactNode | null;
@@ -37,7 +38,7 @@ const getPromotionConfig = (promotion: string): PromotionConfig => {
 
 const Foods = ({ foods }: FoodProps) => {
   return (
-    <div className={styles["cards__wrapper"]}>
+    <>
       {foods ? (
         foods.map((food) => {
           const {
@@ -93,7 +94,7 @@ const Foods = ({ foods }: FoodProps) => {
       ) : (
         <div>Nothing to display</div>
       )}
-    </div>
+    </>
   );
 };
 
