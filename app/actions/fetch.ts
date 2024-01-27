@@ -2,16 +2,22 @@
 
 import { Food } from "@/types/index";
 interface UseQueryOptions {
-  apiUrl?: string;
+  apiUrl: string | undefined;
   page?: number;
   perPage?: number;
   query?: string;
 }
 
 export async function useQuery(
-  options: UseQueryOptions = {}
+  options: UseQueryOptions
 ): Promise<Food[] | null> {
   const { apiUrl, page = 1, perPage = 10, query } = options;
+
+  // Check if apiUrl is provided
+  if (!apiUrl) {
+    console.error("Error: apiUrl is required for fetching data");
+    return null;
+  }
 
   try {
     const response = await fetch(apiUrl as string, {

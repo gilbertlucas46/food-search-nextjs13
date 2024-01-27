@@ -91,7 +91,7 @@ const Foods = ({ foods }: FoodProps) => {
           );
         })
       ) : (
-        <div>no food</div>
+        <div>Nothing to display</div>
       )}
     </div>
   );
