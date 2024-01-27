@@ -8,9 +8,8 @@ export default async function Home() {
     apiUrl: process.env.FOODS_API,
     page: 1,
     perPage: 9,
-    query: "Par",
   });
-  console.log(filteredFoods);
+
   return (
     <div className="container">
       <main className={styles.main}>

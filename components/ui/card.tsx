@@ -32,6 +32,14 @@ const CardContent = React.forwardRef<
 ));
 CardContent.displayName = "CardContent";
 
+const CardContentImage = React.forwardRef<
+  HTMLDivElement,
+  React.HTMLAttributes<HTMLDivElement>
+>(({ className, ...props }, ref) => (
+  <div ref={ref} className={styles["card__content_image"]} {...props} />
+));
+CardContentImage.displayName = "CardContentImage";
+
 const CardFooter = React.forwardRef<
   HTMLDivElement,
   React.HTMLAttributes<HTMLDivElement>
@@ -40,4 +48,11 @@ const CardFooter = React.forwardRef<
 ));
 CardFooter.displayName = "CardFooter";
 
-export { Card, CardHeader, CardFooter, CardTitle, CardContent };
+export {
+  Card,
+  CardHeader,
+  CardFooter,
+  CardTitle,
+  CardContent,
+  CardContentImage,
+};

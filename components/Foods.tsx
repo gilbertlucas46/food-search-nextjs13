@@ -1,6 +1,12 @@
 import { Food } from "@/types";
 import React from "react";
-import { Card, CardContent, CardFooter, CardTitle } from "@/components/ui/Card";
+import {
+  Card,
+  CardContent,
+  CardContentImage,
+  CardFooter,
+  CardTitle,
+} from "@/components/ui/Card";
 import styles from "@/styles/card.module.scss";
 
 export interface FoodProps {
@@ -14,7 +20,12 @@ const Foods = ({ foods }: FoodProps) => {
         foods.map((food) => (
           <Card key={food.id}>
             <CardContent>
-              <img src={food.imageUrl} alt={food.name} />
+              <CardContentImage>
+                <img
+                  src={food.imageUrl.replace("400x400", "294x178")}
+                  alt={food.name}
+                />
+              </CardContentImage>
             </CardContent>
             <CardFooter>
               <CardTitle className="my-2">{food.name}</CardTitle>
