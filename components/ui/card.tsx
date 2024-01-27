@@ -40,11 +40,39 @@ const CardContentImage = React.forwardRef<
 ));
 CardContentImage.displayName = "CardContentImage";
 
+const CardContentLabel = React.forwardRef<
+  HTMLDivElement,
+  React.HTMLAttributes<HTMLDivElement>
+>(({ className, ...props }, ref) => (
+  <div
+    ref={ref}
+    className={`${styles["card__content_label"]} ${className}`}
+    {...props}
+  />
+));
+CardContentLabel.displayName = "CardContentLabel";
+
+const CardContentLabelList = React.forwardRef<
+  HTMLDivElement,
+  React.HTMLAttributes<HTMLDivElement>
+>(({ className, ...props }, ref) => (
+  <div
+    ref={ref}
+    className={`${styles["card__content_labels"]} ${className}`}
+    {...props}
+  />
+));
+CardContentLabelList.displayName = "CardContentLabelList";
+
 const CardContentPromotion = React.forwardRef<
   HTMLDivElement,
   React.HTMLAttributes<HTMLDivElement>
 >(({ className, ...props }, ref) => (
-  <div ref={ref} className={styles["card__content_promotion"]} {...props} />
+  <div
+    ref={ref}
+    className={`${styles["card__content_promotion"]} ${className}`}
+    {...props}
+  />
 ));
 CardContentPromotion.displayName = "CardContentPromotion";
 
@@ -64,4 +92,6 @@ export {
   CardContent,
   CardContentImage,
   CardContentPromotion,
+  CardContentLabel,
+  CardContentLabelList,
 };

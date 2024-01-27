@@ -4,6 +4,8 @@ import {
   Card,
   CardContent,
   CardContentImage,
+  CardContentLabel,
+  CardContentLabelList,
   CardContentPromotion,
   CardFooter,
   CardTitle,
@@ -11,6 +13,7 @@ import {
 import styles from "@/styles/card.module.scss";
 import { BsFillGiftFill } from "react-icons/bs";
 import Image from "next/image";
+import { FaStar } from "react-icons/fa";
 
 export interface FoodProps {
   foods: Food[] | null;
@@ -21,29 +24,48 @@ const Foods = ({ foods }: FoodProps) => {
     <div className={styles["cards__wrapper"]}>
       {foods ? (
         foods.map((food) => {
+          const {
+            rating,
+            minCookTime,
+            maxCookTime,
+            imageUrl,
+            name,
+            promotion,
+            isNew,
+          } = food;
+          const cookTime = `${minCookTime}-${maxCookTime}`;
+          const newRating = rating.toFixed(1);
           return (
             <Card key={food.id}>
               <CardContent>
                 <CardContentImage>
                   <Image
-                    src={food.imageUrl.replace("400x400", "294x178")}
-                    alt={food.name}
+                    src={imageUrl.replace("400x400", "294x178")}
+                    alt={name}
                     width={294}
                     height={178}
                   />
                 </CardContentImage>
-                {food.promotion !== null && (
-                  <CardContentPromotion className="test">
-                    {food.promotion === "gift" ? (
-                      <BsFillGiftFill />
-                    ) : (
-                      food.promotion
-                    )}
+                {promotion !== null && (
+                  <CardContentPromotion>
+                    {promotion === "gift" ? <BsFillGiftFill /> : promotion}
                   </CardContentPromotion>
                 )}
               </CardContent>
               <CardFooter>
-                <CardTitle className="my-2">{food.name}</CardTitle>
+                <CardTitle>{name}</CardTitle>
+                <CardContentLabelList>
+                  <CardContentLabel>
+                    <FaStar />
+                    {newRating}
+                  </CardContentLabel>
+                  <CardContentLabel>{cookTime}</CardContentLabel>
+                  {isNew === true && (
+                    <CardContentLabel className={styles["new"]}>
+                      New
+                    </CardContentLabel>
+                  )}
+                </CardContentLabelList>
               </CardFooter>
             </Card>
           );

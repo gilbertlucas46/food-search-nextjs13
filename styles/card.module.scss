@@ -1,8 +1,13 @@
 .card {
+    
     &__item {
         border-radius: var(--borderRadius);
         overflow: hidden;
         box-shadow: var(--cardBoxShadow);
+        .new {
+            color: var(--green);
+            font-weight: 500;
+        }
     }
     &__content {
         display: flex;
@@ -28,6 +33,30 @@
                 height: 100%;
                 width: 100%;
                 object-fit: cover;
+            }
+        }
+        &_label {
+            border-radius: var(--tagsBorderRadius);
+            background-color: var(--bg-color);
+            width: fit-content;
+            padding: 6px 10px;
+            font-size: 12px;
+            color: var(--gray);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 4px;
+            
+            &:first-of-type {
+                margin-left: 0;
+            }
+            svg {
+                margin-right: 4px;
+                margin-top: -1px;
+            }
+            &s {
+                display: flex;
+                margin-top: 16px;
             }
         }
         &_promotion {
@@ -61,6 +90,8 @@
     }
     &__footer {
         padding: var(--cardPadding);
+        background-color: var(--white);
+       
         h3 {
             font-size: 14px;
             font-weight: 600;
