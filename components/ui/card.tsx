@@ -36,7 +36,7 @@ const CardContentImage = React.forwardRef<
   HTMLDivElement,
   React.HTMLAttributes<HTMLDivElement>
 >(({ className, ...props }, ref) => (
-  <div ref={ref} className={styles["card__content_image"]} {...props} />
+  <div ref={ref} className={styles["card__image"]} {...props} />
 ));
 CardContentImage.displayName = "CardContentImage";
 
@@ -46,7 +46,7 @@ const CardContentLabel = React.forwardRef<
 >(({ className, ...props }, ref) => (
   <div
     ref={ref}
-    className={`${styles["card__content_label"]} ${className}`}
+    className={`${styles["card__label"]} ${className}`}
     {...props}
   />
 ));
@@ -58,7 +58,7 @@ const CardContentLabelList = React.forwardRef<
 >(({ className, ...props }, ref) => (
   <div
     ref={ref}
-    className={`${styles["card__content_labels"]} ${className}`}
+    className={`${styles["card__labels"]} ${className}`}
     {...props}
   />
 ));
@@ -70,7 +70,7 @@ const CardContentPromotion = React.forwardRef<
 >(({ className, ...props }, ref) => (
   <div
     ref={ref}
-    className={`${styles["card__content_promotion"]} ${className}`}
+    className={`${styles["card__promotion"]} ${className}`}
     {...props}
   />
 ));
