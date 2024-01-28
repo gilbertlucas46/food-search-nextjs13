@@ -4,7 +4,7 @@
 import { useState } from "react";
 import { Food, ShowMoreProps } from "@/types";
 import Foods from "@/components/Foods/Foods";
-import { queryFood } from "@/app/actions/fetch-food";
+import { queryFood } from "@/app/actions/fetchFood";
 import Spinner from "@/components/UI/Spinner";
 import { CardWrapper } from "@/components/UI/Card";
 import styles from "@/styles/card.module.scss";

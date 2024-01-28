@@ -4,6 +4,7 @@ import { useEffect, useRef, useState } from "react";
 import { useRouter } from "next/navigation";
 import { Category, FoodCategoryFilterProps } from "@/types";
 import useCreateQueryString from "@/components/Hooks/useCreateQueryString";
+import { fetchCategories } from "@/app/actions/fetchCategories";
 
 const FoodCategoryFilter = ({ categoryId }: FoodCategoryFilterProps) => {
   // Get router and current search parameters
@@ -24,15 +25,13 @@ const FoodCategoryFilter = ({ categoryId }: FoodCategoryFilterProps) => {
   const createQueryString = useCreateQueryString();
 
   // Function to fetch categories from the API
-  const fetchCategories = async () => {
-    try {
-      const response = await fetch(
-        "https://run.mocky.io/v3/b88ec762-2cb3-4015-8960-2839b06a7593"
-      );
-      const data = await response.json();
+  const fetchCategoriesFromApi = async () => {
+    const data = await fetchCategories({
+      apiUrl: "https://run.mocky.io/v3/b88ec762-2cb3-4015-8960-2839b06a7593",
+    });
+
+    if (data) {
       setCategories(data);
-    } catch (error) {
-      console.error("Error fetching categories:", error);
     }
   };
 
@@ -57,7 +56,7 @@ const FoodCategoryFilter = ({ categoryId }: FoodCategoryFilterProps) => {
 
   // Fetch categories on component mount
   useEffect(() => {
-    fetchCategories();
+    fetchCategoriesFromApi();
   }, []);
 
   return (

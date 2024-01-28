@@ -1,4 +1,4 @@
-import { queryFood } from "./actions/fetch-food";
+import { queryFood } from "./actions/fetchFood";
 import { ShowMore } from "@/components/Search/ShowMore";
 import FoodsSearch from "@/components/Foods/FoodsSearch";
 import { v4 as uuid } from "uuid";
