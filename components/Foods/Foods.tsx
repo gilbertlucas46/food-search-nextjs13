@@ -14,7 +14,6 @@ import styles from "@/styles/card.module.scss";
 import { BsFillGiftFill } from "react-icons/bs";
 import Image from "next/image";
 import { FaStar } from "react-icons/fa";
-import Spinner from "../UI/Spinner";
 
 interface PromotionConfig {
   icon: React.ReactNode | null;

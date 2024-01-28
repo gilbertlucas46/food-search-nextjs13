@@ -1,14 +1,13 @@
-// components/Foods/FoodCategoryFilter.tsx
 "use client";
 
-import { useCallback, useEffect, useRef, useState } from "react";
-import { useSearchParams, useRouter } from "next/navigation";
+import { useEffect, useRef, useState } from "react";
+import { useRouter } from "next/navigation";
 import { Category, FoodCategoryFilterProps } from "@/types";
+import useCreateQueryString from "@/components/Hooks/useCreateQueryString";
 
 const FoodCategoryFilter = ({ categoryId }: FoodCategoryFilterProps) => {
   // Get router and current search parameters
   const router = useRouter();
-  const searchParams = useSearchParams();
 
   // track the initial render
   const initialRender = useRef(true);
@@ -20,6 +19,9 @@ const FoodCategoryFilter = ({ categoryId }: FoodCategoryFilterProps) => {
 
   // State for storing categories
   const [categories, setCategories] = useState<Category[]>([]);
+
+  // Use the custom hook
+  const createQueryString = useCreateQueryString();
 
   // Function to fetch categories from the API
   const fetchCategories = async () => {
@@ -34,17 +36,6 @@ const FoodCategoryFilter = ({ categoryId }: FoodCategoryFilterProps) => {
     }
   };
 
-  // query string with updated category
-  const createQueryString = useCallback(
-    (name: string, value: string) => {
-      const params = new URLSearchParams(searchParams);
-      params.set(name, value);
-
-      return params.toString();
-    },
-    [searchParams]
-  );
-
   // handle URL update after initial render
   useEffect(() => {
     // Check if it's the initial render
@@ -57,7 +48,7 @@ const FoodCategoryFilter = ({ categoryId }: FoodCategoryFilterProps) => {
     if (selectedCategoryId) {
       router.push(`/?${createQueryString("categoryId", selectedCategoryId)}`);
     }
-  }, [searchParams, selectedCategoryId]);
+  }, [selectedCategoryId]);
 
   // Handler for category button click
   const handleCategoryClick = (id: string) => {

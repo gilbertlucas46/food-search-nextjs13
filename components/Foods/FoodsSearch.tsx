@@ -3,10 +3,12 @@
 import { useEffect, useRef, useState } from "react";
 import { useRouter } from "next/navigation";
 import { useDebounce } from "use-debounce";
+import useCreateQueryString from "@/components/Hooks/useCreateQueryString";
 
 const FoodsSearch = ({ search }: { search?: string }) => {
   const router = useRouter();
   const initialRender = useRef(true);
+  const createQueryString = useCreateQueryString();
 
   // Set an initial value for the text state
   const [text, setText] = useState(search || "");
@@ -21,7 +23,7 @@ const FoodsSearch = ({ search }: { search?: string }) => {
     if (!query) {
       router.push(`/`);
     } else {
-      router.push(`/?search=${query}`);
+      router.push(`/?${createQueryString("search", query)}`);
     }
   }, [query]);
 

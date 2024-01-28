@@ -1,5 +1,5 @@
 import { queryFood } from "./actions/fetch-food";
-import { ShowMore } from "@/components/ShowMore";
+import { ShowMore } from "@/components/Search/ShowMore";
 import FoodsSearch from "@/components/Foods/FoodsSearch";
 import { v4 as uuid } from "uuid";
 import FoodCategoryFilter from "@/components/Foods/FoodCategoryFilter";

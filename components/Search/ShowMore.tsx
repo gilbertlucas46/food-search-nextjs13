@@ -3,10 +3,10 @@
 
 import { useState } from "react";
 import { Food, ShowMoreProps } from "@/types";
-import Foods from "./Foods/Foods";
+import Foods from "@/components/Foods/Foods";
 import { queryFood } from "@/app/actions/fetch-food";
-import Spinner from "./UI/Spinner";
-import { CardWrapper } from "./UI/Card";
+import Spinner from "@/components/UI/Spinner";
+import { CardWrapper } from "@/components/UI/Card";
 import styles from "@/styles/card.module.scss";
 
 export function ShowMore({ search, initialFoods, categoryId }: ShowMoreProps) {
