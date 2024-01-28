@@ -1,4 +1,4 @@
-import { Food } from "@/types";
+import { Food, FoodProps, PromotionConfig } from "@/types";
 import React from "react";
 import {
   Card,
@@ -14,15 +14,6 @@ import styles from "@/styles/card.module.scss";
 import { BsFillGiftFill } from "react-icons/bs";
 import Image from "next/image";
 import { FaStar } from "react-icons/fa";
-
-interface PromotionConfig {
-  icon: React.ReactNode | null;
-  content: string;
-  cssClass: string;
-}
-export interface FoodProps {
-  foods: Food[] | null;
-}
 
 const getPromotionConfig = (promotion: string): PromotionConfig => {
   const promotions: Record<string, PromotionConfig> = {

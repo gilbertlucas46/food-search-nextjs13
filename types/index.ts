@@ -25,3 +25,22 @@ export interface ShowMoreProps {
 export interface FoodCategoryFilterProps {
   categoryId: string | undefined;
 }
+export interface QueryFoodOptions {
+  apiUrl: string | undefined;
+  page?: number;
+  perPage?: number;
+  query?: string;
+  categoryId?: string; // Add categoryId parameter
+}
+export interface FetchCategoriesOptions {
+  apiUrl: string | undefined;
+}
+
+export interface PromotionConfig {
+  icon: React.ReactNode | null;
+  content: string;
+  cssClass: string;
+}
+export interface FoodProps {
+  foods: Food[] | null;
+}

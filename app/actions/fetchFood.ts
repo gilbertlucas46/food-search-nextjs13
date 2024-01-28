@@ -1,14 +1,6 @@
 "use server";
 
-import { Food } from "@/types/index";
-
-interface QueryFoodOptions {
-  apiUrl: string | undefined;
-  page?: number;
-  perPage?: number;
-  query?: string;
-  categoryId?: string; // Add categoryId parameter
-}
+import { Food, QueryFoodOptions } from "@/types/index";
 
 export async function queryFood(
   options: QueryFoodOptions

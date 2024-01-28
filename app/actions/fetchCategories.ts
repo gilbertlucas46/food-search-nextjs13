@@ -1,11 +1,7 @@
 // app/actions/fetchCategories.ts
 "use server";
 
-import { Category } from "@/types/index";
-
-interface FetchCategoriesOptions {
-  apiUrl: string | undefined;
-}
+import { Category, FetchCategoriesOptions } from "@/types/index";
 
 export async function fetchCategories(
   options: FetchCategoriesOptions
