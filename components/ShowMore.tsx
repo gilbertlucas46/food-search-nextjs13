@@ -4,6 +4,7 @@ import { useState } from "react";
 import { Food } from "@/types";
 import Foods from "./Foods";
 import { useQuery } from "@/app/actions/fetch";
+import Spinner from "./ui/Spinner";
 
 export function ShowMore() {
   const [foods, setFoods] = useState<Food[]>([]);
@@ -30,6 +31,7 @@ export function ShowMore() {
   return (
     <>
       <Foods foods={foods} />
+      <Spinner />
       <button onClick={() => ShowMoreFoods()}> show more</button>
     </>
   );
