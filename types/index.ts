@@ -11,3 +11,17 @@ export interface Food {
   name: string;
   imageUrl: string;
 }
+
+export type Category = {
+  id: string;
+  name: string;
+};
+
+export interface ShowMoreProps {
+  search: string | undefined;
+  initialFoods: any; // Change 'any' to the actual type of initialFoods
+  categoryId: string | undefined;
+}
+export interface FoodCategoryFilterProps {
+  categoryId: string | undefined;
+}

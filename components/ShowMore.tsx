@@ -2,20 +2,20 @@
 "use client";
 
 import { useState } from "react";
-import { Food } from "@/types";
+import { Food, ShowMoreProps } from "@/types";
 import Foods from "./Foods/Foods";
 import { queryFood } from "@/app/actions/fetch-food";
 import Spinner from "./UI/Spinner";
 import { CardWrapper } from "./UI/Card";
 import styles from "@/styles/card.module.scss";
 
-export function ShowMore({ search, initialFoods, categoryId }) {
+export function ShowMore({ search, initialFoods, categoryId }: ShowMoreProps) {
   const [foods, setFoods] = useState(initialFoods);
   const [page, setPage] = useState(1);
 
   const ShowMoreFoods = async () => {
     const nextPage = (page % 7) + 1;
-    const newProducts =
+    const newFoodItems =
       (await queryFood({
         apiUrl: "https://run.mocky.io/v3/c75dc0d8-ad78-4b3d-b697-807a5ded8645",
         page: nextPage,
@@ -24,7 +24,7 @@ export function ShowMore({ search, initialFoods, categoryId }) {
         categoryId: categoryId, // Use the state variable here
       })) ?? [];
 
-    setFoods((prevProducts) => [...prevProducts, ...newProducts]);
+    setFoods((prevFoods: Food[]) => [...prevFoods, ...newFoodItems]);
     setPage(nextPage);
   };
 

@@ -3,13 +3,9 @@
 
 import { useCallback, useEffect, useRef, useState } from "react";
 import { useSearchParams, useRouter } from "next/navigation";
+import { Category, FoodCategoryFilterProps } from "@/types";
 
-const FoodCategoryFilter = ({
-  categoryId,
-}: {
-  categoryId?: string;
-  searchParams: { [key: string]: string | string[] | undefined };
-}) => {
+const FoodCategoryFilter = ({ categoryId }: FoodCategoryFilterProps) => {
   // Get router and current search parameters
   const router = useRouter();
   const searchParams = useSearchParams();
@@ -23,7 +19,7 @@ const FoodCategoryFilter = ({
   );
 
   // State for storing categories
-  const [categories, setCategories] = useState([]);
+  const [categories, setCategories] = useState<Category[]>([]);
 
   // Function to fetch categories from the API
   const fetchCategories = async () => {
@@ -64,7 +60,7 @@ const FoodCategoryFilter = ({
   }, [searchParams, selectedCategoryId]);
 
   // Handler for category button click
-  const handleCategoryClick = (id) => {
+  const handleCategoryClick = (id: string) => {
     setSelectedCategoryId(id);
   };
 
