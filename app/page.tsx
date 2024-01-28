@@ -1,8 +1,9 @@
 import styles from "@/styles/card.module.scss";
 import { useQuery } from "./actions/fetch";
-import Foods from "@/components/Foods";
 import { ShowMore } from "@/components/ShowMore";
-import { CardWrapper } from "@/components/ui/Card";
+import { CardWrapper } from "@/components/UI/Card";
+import FoodsSearch from "@/components/Foods/FooodsSearch";
+import { v4 as uuid } from "uuid";
 
 export default async function Home({
   searchParams,
@@ -19,7 +20,13 @@ export default async function Home({
 
   return (
     <div className="container">
-      <main>
+      <main key={uuid()}>
+        <FoodsSearch search={search} />
+        {/* 
+          Need to add dynamic key "key={uuid()}", this makes component look
+          different every time.
+          https://nextjs.org/docs/app/building-your-application/caching#router-cache
+        */}
         <CardWrapper className={styles["cards__wrapper"]}>
           <ShowMore initialFoods={filteredFoods} search={search} />
         </CardWrapper>

@@ -2,19 +2,15 @@
 
 import { useState } from "react";
 import { Food } from "@/types";
-import Foods from "./Foods";
+import Foods from "./Foods/Foods";
 import { useQuery } from "@/app/actions/fetch";
-import Spinner from "./ui/Spinner";
+import Spinner from "./UI/Spinner";
 
 export function ShowMore({ search, initialFoods }) {
   const [foods, setFoods] = useState(initialFoods);
   const [page, setPage] = useState(1);
 
-  const delay = (ms: number) =>
-    new Promise((resolve) => setTimeout(resolve, ms));
-
   const ShowMoreFoods = async () => {
-    await delay(2000);
     const nextPage = (page % 7) + 1;
     const newProducts =
       (await useQuery({
