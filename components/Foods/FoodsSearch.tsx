@@ -8,7 +8,9 @@ const FoodsSearch = ({ search }: { search?: string }) => {
   const router = useRouter();
   const initialRender = useRef(true);
 
-  const [text, setText] = useState(search);
+  // Set an initial value for the text state
+  const [text, setText] = useState(search || "");
+
   const [query] = useDebounce(text, 750);
 
   useEffect(() => {

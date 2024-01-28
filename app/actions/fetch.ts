@@ -1,17 +1,19 @@
 "use server";
 
 import { Food } from "@/types/index";
+
 interface UseQueryOptions {
   apiUrl: string | undefined;
   page?: number;
   perPage?: number;
   query?: string;
+  categoryId?: string; // Add categoryId parameter
 }
 
 export async function useQuery(
   options: UseQueryOptions
 ): Promise<Food[] | null> {
-  const { apiUrl, page = 1, perPage = 9, query } = options;
+  const { apiUrl, page = 1, perPage = 9, query, categoryId } = options;
 
   // Check if apiUrl is provided
   if (!apiUrl) {
@@ -25,12 +27,14 @@ export async function useQuery(
     });
     const data: { foods: Food[] } = await response.json();
 
-    // Apply case-insensitive partial match for restaurant name
-    const filteredFoods = query
-      ? data.foods.filter((food) =>
-          food.restaurant.toLowerCase().includes(query.toLowerCase())
-        )
-      : data.foods;
+    // Apply filtering based on both restaurant name and categoryId
+    const filteredFoods = data.foods.filter((food) => {
+      const matchesQuery =
+        !query || food.restaurant.toLowerCase().includes(query.toLowerCase());
+      const matchesCategory = !categoryId || food.categoryId === categoryId;
+
+      return matchesQuery && matchesCategory;
+    });
 
     // Calculate start and end indices for pagination
     const startIndex = (page - 1) * perPage;
