@@ -2,8 +2,7 @@
 "use client";
 
 import { useCallback, useEffect, useRef, useState } from "react";
-import { usePathname, useSearchParams, useRouter } from "next/navigation";
-import { useDebounce } from "use-debounce";
+import { useSearchParams, useRouter } from "next/navigation";
 
 const FoodCategoryFilter = ({
   categoryId,
@@ -11,18 +10,35 @@ const FoodCategoryFilter = ({
   categoryId?: string;
   searchParams: { [key: string]: string | string[] | undefined };
 }) => {
+  // Get router and current search parameters
   const router = useRouter();
-  const pathname = usePathname();
   const searchParams = useSearchParams();
+
+  // track the initial render
   const initialRender = useRef(true);
 
-  // Set an initial value for the text state
+  // Set an initial value for the selected category state
   const [selectedCategoryId, setSelectedCategoryId] = useState(
     categoryId || ""
   );
 
-  const [category] = useDebounce(selectedCategoryId, 750);
+  // State for storing categories
+  const [categories, setCategories] = useState([]);
 
+  // Function to fetch categories from the API
+  const fetchCategories = async () => {
+    try {
+      const response = await fetch(
+        "https://run.mocky.io/v3/b88ec762-2cb3-4015-8960-2839b06a7593"
+      );
+      const data = await response.json();
+      setCategories(data);
+    } catch (error) {
+      console.error("Error fetching categories:", error);
+    }
+  };
+
+  // query string with updated category
   const createQueryString = useCallback(
     (name: string, value: string) => {
       const params = new URLSearchParams(searchParams);
@@ -33,50 +49,34 @@ const FoodCategoryFilter = ({
     [searchParams]
   );
 
+  // handle URL update after initial render
   useEffect(() => {
+    // Check if it's the initial render
     if (initialRender.current) {
       initialRender.current = false;
       return;
     }
-    const url = `${pathname}?${searchParams}`;
 
-    if (!category) {
-      router.push(url);
-    } else {
+    // Check if a category is selected, then update the URL
+    if (selectedCategoryId) {
       router.push(`/?${createQueryString("categoryId", selectedCategoryId)}`);
     }
   }, [searchParams, selectedCategoryId]);
 
+  // Handler for category button click
   const handleCategoryClick = (id) => {
     setSelectedCategoryId(id);
   };
 
-  const categories = [
-    {
-      id: "6288a89f1f0152b8c2cd512b",
-      name: "Shushi",
-    },
-    {
-      id: "6288a89f7338764f2071a8a8",
-      name: "Pizza",
-    },
-    {
-      id: "6288a89f70dc8cf93b71609b",
-      name: "Hot Meals",
-    },
-    {
-      id: "6288a89fe6c2fe0b758360fe",
-      name: "Deserts",
-    },
-    {
-      id: "6288a89fac9e970731bfaa7b",
-      name: "Drinks",
-    },
-  ];
+  // Fetch categories on component mount
+  useEffect(() => {
+    fetchCategories();
+  }, []);
 
   return (
     <div>
       <p>Filter by Category:</p>
+
       <div className="categorybuttons">
         {categories.map((item) => (
           <button key={item.id} onClick={() => handleCategoryClick(item.id)}>

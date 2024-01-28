@@ -10,7 +10,6 @@ const FoodsSearch = ({ search }: { search?: string }) => {
 
   // Set an initial value for the text state
   const [text, setText] = useState(search || "");
-
   const [query] = useDebounce(text, 750);
 
   useEffect(() => {

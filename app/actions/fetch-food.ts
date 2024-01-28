@@ -2,7 +2,7 @@
 
 import { Food } from "@/types/index";
 
-interface UseQueryOptions {
+interface QueryFoodOptions {
   apiUrl: string | undefined;
   page?: number;
   perPage?: number;
@@ -10,8 +10,8 @@ interface UseQueryOptions {
   categoryId?: string; // Add categoryId parameter
 }
 
-export async function useQuery(
-  options: UseQueryOptions
+export async function queryFood(
+  options: QueryFoodOptions
 ): Promise<Food[] | null> {
   const { apiUrl, page = 1, perPage = 9, query, categoryId } = options;
 

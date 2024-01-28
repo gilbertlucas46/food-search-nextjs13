@@ -4,7 +4,7 @@
 import { useState } from "react";
 import { Food } from "@/types";
 import Foods from "./Foods/Foods";
-import { useQuery } from "@/app/actions/fetch";
+import { queryFood } from "@/app/actions/fetch-food";
 import Spinner from "./UI/Spinner";
 import { CardWrapper } from "./UI/Card";
 import styles from "@/styles/card.module.scss";
@@ -16,7 +16,7 @@ export function ShowMore({ search, initialFoods, categoryId }) {
   const ShowMoreFoods = async () => {
     const nextPage = (page % 7) + 1;
     const newProducts =
-      (await useQuery({
+      (await queryFood({
         apiUrl: "https://run.mocky.io/v3/c75dc0d8-ad78-4b3d-b697-807a5ded8645",
         page: nextPage,
         perPage: 9,

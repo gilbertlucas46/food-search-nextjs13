@@ -1,4 +1,4 @@
-import { useQuery } from "./actions/fetch";
+import { queryFood } from "./actions/fetch-food";
 import { ShowMore } from "@/components/ShowMore";
 import FoodsSearch from "@/components/Foods/FoodsSearch";
 import { v4 as uuid } from "uuid";
@@ -17,7 +17,7 @@ export default async function Home({
       ? searchParams.categoryId
       : undefined;
 
-  const filteredFoods = await useQuery({
+  const filteredFoods = await queryFood({
     apiUrl: "https://run.mocky.io/v3/c75dc0d8-ad78-4b3d-b697-807a5ded8645",
     query: search,
     categoryId,
