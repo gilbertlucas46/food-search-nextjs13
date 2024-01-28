@@ -11,7 +11,7 @@ interface UseQueryOptions {
 export async function useQuery(
   options: UseQueryOptions
 ): Promise<Food[] | null> {
-  const { apiUrl, page = 1, perPage = 10, query } = options;
+  const { apiUrl, page = 1, perPage = 9, query } = options;
 
   // Check if apiUrl is provided
   if (!apiUrl) {

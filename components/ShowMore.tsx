@@ -6,8 +6,8 @@ import Foods from "./Foods";
 import { useQuery } from "@/app/actions/fetch";
 import Spinner from "./ui/Spinner";
 
-export function ShowMore() {
-  const [foods, setFoods] = useState<Food[]>([]);
+export function ShowMore({ search, initialFoods }) {
+  const [foods, setFoods] = useState(initialFoods);
   const [page, setPage] = useState(1);
 
   const delay = (ms: number) =>
@@ -24,9 +24,11 @@ export function ShowMore() {
         query: "",
       })) ?? [];
 
-    setFoods((prevProducts: Food[]) => [...prevProducts, ...newProducts]);
+    setFoods((prevProducts) => [...prevProducts, ...newProducts]);
     setPage(nextPage);
   };
+
+  console.log(foods);
 
   return (
     <>

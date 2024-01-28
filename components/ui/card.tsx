@@ -8,6 +8,14 @@ const Card = React.forwardRef<
 ));
 Card.displayName = "Card";
 
+const CardWrapper = React.forwardRef<
+  HTMLUListElement,
+  React.HTMLAttributes<HTMLUListElement>
+>(({ className, ...props }, ref) => (
+  <ul ref={ref} {...props} className={styles["cards__wrapper"]} />
+));
+CardWrapper.displayName = "CardWrapper";
+
 const CardHeader = React.forwardRef<
   HTMLDivElement,
   React.HTMLAttributes<HTMLDivElement>
@@ -94,4 +102,5 @@ export {
   CardContentPromotion,
   CardContentLabel,
   CardContentLabelList,
+  CardWrapper,
 };
