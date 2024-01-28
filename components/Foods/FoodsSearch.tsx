@@ -9,6 +9,7 @@ import { IoIosSearch } from "react-icons/io";
 
 const FoodsSearch = ({ search }: { search?: string }) => {
   const router = useRouter();
+  const inputRef = useRef<HTMLInputElement>(null);
   const initialRender = useRef(true);
   const createQueryString = useCreateQueryString();
 
@@ -27,12 +28,15 @@ const FoodsSearch = ({ search }: { search?: string }) => {
     } else {
       router.push(`/?${createQueryString("search", query)}`);
     }
+    // Focus on the input field after router push
+    inputRef.current?.focus();
   }, [query]);
 
   return (
     <SearchInputWrapper>
       <IoIosSearch />
       <SearchInput
+        ref={inputRef}
         value={text}
         id="search"
         type="text"
