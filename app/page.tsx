@@ -3,6 +3,7 @@ import { ShowMore } from "@/components/Search/ShowMore";
 import FoodsSearch from "@/components/Foods/FoodsSearch";
 import { v4 as uuid } from "uuid";
 import FoodCategoryFilter from "@/components/Foods/FoodCategoryFilter";
+import styles from "@/styles/page.module.scss";
 
 export default async function Home({
   searchParams,
@@ -30,7 +31,7 @@ export default async function Home({
           different every time.
           https://nextjs.org/docs/app/building-your-application/caching#router-cache
       */}
-      <main key={uuid()}>
+      <main key={uuid()} className={styles.searchWrapper}>
         <FoodsSearch search={search} />
         <FoodCategoryFilter categoryId={categoryId} />
         <ShowMore

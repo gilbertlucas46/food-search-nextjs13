@@ -1,0 +1,30 @@
+.search {
+    &__input {
+        border: 0;
+        width: 100%;
+        padding: 15px 16px 15px 6px;
+        border-radius: var(--borderRadius);
+        font-size: 14px;
+        color: var(--gray-dark);
+        font-weight: 400;
+        &:focus-visible {
+            outline: unset;
+        }
+        
+    }
+    &__wrapper {
+        border: 1px solid var(--bd-color-gray);
+        border-radius: var(--borderRadius);
+        background-color: var(--white);
+        width: 100%;
+        max-width: 335px;
+        padding: 0 0 0 20px;
+        display: flex;
+        align-items: center;
+        transition: all 0.4s;
+        &:focus-within {
+            border: 1px solid var(--yellow);
+        }
+        
+    }
+}

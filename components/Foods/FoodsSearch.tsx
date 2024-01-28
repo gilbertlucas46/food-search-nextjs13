@@ -4,6 +4,8 @@ import { useEffect, useRef, useState } from "react";
 import { useRouter } from "next/navigation";
 import { useDebounce } from "use-debounce";
 import useCreateQueryString from "@/components/Hooks/useCreateQueryString";
+import { SearchInput, SearchInputWrapper } from "../UI/SearchInput";
+import { IoIosSearch } from "react-icons/io";
 
 const FoodsSearch = ({ search }: { search?: string }) => {
   const router = useRouter();
@@ -28,13 +30,17 @@ const FoodsSearch = ({ search }: { search?: string }) => {
   }, [query]);
 
   return (
-    <div>
-      <input
+    <SearchInputWrapper>
+      <IoIosSearch />
+      <SearchInput
         value={text}
+        id="search"
+        type="text"
+        name="search"
         placeholder="Enter restaurant name..."
         onChange={(e) => setText(e.target.value)}
       />
-    </div>
+    </SearchInputWrapper>
   );
 };
 
