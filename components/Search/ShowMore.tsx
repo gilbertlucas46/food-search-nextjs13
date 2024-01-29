@@ -1,7 +1,7 @@
 // components/ShowMore.tsx
 "use client";
 import { useState, useEffect } from "react";
-import { Food, QueryFoodResult, ShowMoreProps } from "@/types";
+import { QueryFoodResult, ShowMoreProps } from "@/types";
 import Foods from "@/components/Foods/Foods";
 import { queryFood } from "@/app/actions/fetchFood";
 import Spinner from "@/components/UI/Spinner";
@@ -16,7 +16,7 @@ export function ShowMore({
 }: ShowMoreProps) {
   const [foods, setFoods] = useState(initialFoods);
   const [page, setPage] = useState(1);
-  const [maxPages, setMaxPages] = useState(totalPages);
+  const [maxPages, setMaxPages] = useState<number | undefined>(totalPages);
 
   const ShowMoreFoods = async () => {
     try {
@@ -29,11 +29,9 @@ export function ShowMore({
         categoryId: categoryId,
       })) ?? { data: null, totalPages: 0 };
 
-      console.log(data);
-
       // Check if there's data
       if (data) {
-        setFoods((prevFoods) => ({
+        setFoods((prevFoods: QueryFoodResult) => ({
           ...prevFoods,
           data: [...(prevFoods?.data || []), ...data],
         }));
@@ -52,7 +50,7 @@ export function ShowMore({
         <Foods foods={foods.data} />
       </CardWrapper>
       <Spinner />
-      {page < maxPages && (
+      {maxPages !== undefined && page < maxPages && (
         <button onClick={() => ShowMoreFoods()}>Show More</button>
       )}
     </>

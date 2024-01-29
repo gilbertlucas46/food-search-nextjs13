@@ -1,0 +1,28 @@
+.categorybuttons {
+    width: fit-content;
+    border: 1px solid var(--yellow);
+    border-radius: var(--borderRadius);
+    background-color: var(--white);
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    margin: 24px 0;
+    @media (min-width:  768px) {
+        margin: 44px 0;
+    }
+    .active {
+        background-color: var(--yellow);
+        color: var(--white);
+    }
+    button {
+        border: 0;
+        background-color: transparent;
+        padding: 16px 24px;
+        transition: all 0.4s;
+        cursor: pointer;
+        &:hover {
+            background-color: var(--yellow);
+            color: var(--white);
+        }
+    }
+}

@@ -1,14 +1,16 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import { Category, FoodCategoryFilterProps } from "@/types";
 import useCreateQueryString from "@/components/Hooks/useCreateQueryString";
 import { fetchCategories } from "@/app/actions/fetchCategories";
+import styles from "@/styles/categoryButtons.module.scss";
 
 const FoodCategoryFilter = ({ categoryId }: FoodCategoryFilterProps) => {
   // Get router and current search parameters
   const router = useRouter();
+  const searchParams = useSearchParams();
 
   // track the initial render
   const initialRender = useRef(true);
@@ -31,7 +33,13 @@ const FoodCategoryFilter = ({ categoryId }: FoodCategoryFilterProps) => {
     });
 
     if (data) {
-      setCategories(data);
+      // Add the new category to the existing categories
+      const allCategory = {
+        id: "12345",
+        name: "All",
+      };
+
+      setCategories([allCategory, ...data]);
     }
   };
 
@@ -58,18 +66,27 @@ const FoodCategoryFilter = ({ categoryId }: FoodCategoryFilterProps) => {
   useEffect(() => {
     fetchCategoriesFromApi();
   }, []);
-
   return (
-    <div>
-      <p>Filter by Category:</p>
+    <div className={styles["categorybuttons"]}>
+      {categories.map((item) => {
+        const isActive = item.id === searchParams.get("categoryId");
 
-      <div className="categorybuttons">
-        {categories.map((item) => (
-          <button key={item.id} onClick={() => handleCategoryClick(item.id)}>
+        return (
+          <button
+            key={item.id}
+            className={`${
+              isActive
+                ? styles["active"]
+                : !isActive && item.id === "12345"
+                ? styles["active"]
+                : ""
+            }`}
+            onClick={() => handleCategoryClick(item.id)}
+          >
             {item.name}
           </button>
-        ))}
-      </div>
+        );
+      })}
     </div>
   );
 };
