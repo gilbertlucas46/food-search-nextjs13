@@ -47,7 +47,7 @@ const FoodCategoryFilter = ({ categoryId }: FoodCategoryFilterProps) => {
     if (selectedCategoryId) {
       router.push(`/?${createQueryString("categoryId", selectedCategoryId)}`);
     }
-  }, [selectedCategoryId]);
+  }, [selectedCategoryId, createQueryString, router]);
 
   // Handler for category button click
   const handleCategoryClick = (id: string) => {

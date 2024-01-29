@@ -9,7 +9,11 @@ import Spinner from "@/components/UI/Spinner";
 import { CardWrapper } from "@/components/UI/Card";
 import styles from "@/styles/card.module.scss";
 
-export function ShowMore({ search, initialFoods, categoryId }: ShowMoreProps) {
+export async function ShowMore({
+  search,
+  initialFoods,
+  categoryId,
+}: ShowMoreProps) {
   const [foods, setFoods] = useState(initialFoods);
   const [page, setPage] = useState(1);
 

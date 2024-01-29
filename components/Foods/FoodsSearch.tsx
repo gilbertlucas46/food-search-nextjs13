@@ -30,7 +30,7 @@ const FoodsSearch = ({ search }: { search?: string }) => {
     }
     // Focus on the input field after router push
     inputRef.current?.focus();
-  }, [query]);
+  }, [query, createQueryString, router]);
 
   return (
     <SearchInputWrapper>
