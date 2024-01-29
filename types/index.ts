@@ -25,6 +25,7 @@ export interface ShowMoreProps {
 }
 export interface FoodCategoryFilterProps {
   categoryId: string | undefined;
+  categoryList: Category[] | null;
 }
 export interface QueryFoodOptions {
   apiUrl: string | undefined;

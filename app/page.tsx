@@ -1,9 +1,11 @@
+// app/page.tsx
 import { queryFood } from "./actions/fetchFood";
 import { ShowMore } from "@/components/Search/ShowMore";
 import FoodsSearch from "@/components/Foods/FoodsSearch";
 import { v4 as uuid } from "uuid";
 import FoodCategoryFilter from "@/components/Foods/FoodCategoryFilter";
 import styles from "@/styles/page.module.scss";
+import { fetchCategories } from "@/app/actions/fetchCategories"; // Import fetchCategories
 
 export default async function Home({
   searchParams,
@@ -17,6 +19,29 @@ export default async function Home({
     typeof searchParams.categoryId === "string"
       ? searchParams.categoryId
       : undefined;
+
+  // // Function to fetch categories from the API
+  // const fetchCategoriesFromApi = async () => {
+  //   const data = await fetchCategories({
+  //     apiUrl: "https://run.mocky.io/v3/b88ec762-2cb3-4015-8960-2839b06a7593",
+  //   });
+
+  //   if (data) {
+  //     // Add the new category to the existing categories
+  //     const allCategory = {
+  //       id: "all",
+  //       name: "All",
+  //     };
+
+  //     return [allCategory, ...data];
+  //   }
+
+  //   return [];
+  // };
+
+  const categoryList = await fetchCategories({
+    apiUrl: "https://run.mocky.io/v3/b88ec762-2cb3-4015-8960-2839b06a7593",
+  });
 
   const filteredFoods = await queryFood({
     apiUrl: "https://run.mocky.io/v3/c75dc0d8-ad78-4b3d-b697-807a5ded8645",
@@ -33,7 +58,10 @@ export default async function Home({
       */}
       <main key={uuid()} className={styles.searchWrapper}>
         <FoodsSearch search={search} />
-        <FoodCategoryFilter categoryId={categoryId} />
+        <FoodCategoryFilter
+          categoryId={categoryId}
+          categoryList={categoryList} // Pass the function as a prop
+        />
         <ShowMore
           initialFoods={filteredFoods}
           totalPages={filteredFoods.totalPages}

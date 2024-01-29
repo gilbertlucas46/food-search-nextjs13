@@ -1,84 +1,64 @@
+// components/Foods/FoodCategoryFilter.tsx
 "use client";
 
 import { useEffect, useRef, useState } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import { Category, FoodCategoryFilterProps } from "@/types";
 import useCreateQueryString from "@/components/Hooks/useCreateQueryString";
-import { fetchCategories } from "@/app/actions/fetchCategories";
 import styles from "@/styles/categoryButtons.module.scss";
 
-const FoodCategoryFilter = ({ categoryId }: FoodCategoryFilterProps) => {
-  // Get router and current search parameters
+const FoodCategoryFilter = ({
+  categoryId,
+  categoryList,
+}: FoodCategoryFilterProps) => {
   const router = useRouter();
   const searchParams = useSearchParams();
-
-  // track the initial render
   const initialRender = useRef(true);
-
-  // Set an initial value for the selected category state
   const [selectedCategoryId, setSelectedCategoryId] = useState(
     categoryId || ""
   );
-
-  // State for storing categories
-  const [categories, setCategories] = useState<Category[]>([]);
-
-  // Use the custom hook
   const createQueryString = useCreateQueryString();
 
-  // Function to fetch categories from the API
-  const fetchCategoriesFromApi = async () => {
-    const data = await fetchCategories({
-      apiUrl: "https://run.mocky.io/v3/b88ec762-2cb3-4015-8960-2839b06a7593",
-    });
-
-    if (data) {
-      // Add the new category to the existing categories
-      const allCategory = {
-        id: "12345",
-        name: "All",
-      };
-
-      setCategories([allCategory, ...data]);
-    }
+  const allCategory = {
+    id: "all",
+    name: "All",
   };
 
-  // handle URL update after initial render
+  const handleCategoryClick = (id: string) => {
+    setSelectedCategoryId(id);
+  };
+
   useEffect(() => {
-    // Check if it's the initial render
     if (initialRender.current) {
       initialRender.current = false;
       return;
     }
 
-    // Check if a category is selected, then update the URL
-    if (selectedCategoryId) {
+    if (selectedCategoryId === "all") {
+      router.push(`/`);
+    }
+
+    if (selectedCategoryId && selectedCategoryId !== "all") {
       router.push(`/?${createQueryString("categoryId", selectedCategoryId)}`);
     }
   }, [selectedCategoryId, createQueryString, router]);
 
-  // Handler for category button click
-  const handleCategoryClick = (id: string) => {
-    setSelectedCategoryId(id);
-  };
+  if (!categoryList) return;
+  const categories = [allCategory, ...categoryList];
 
-  // Fetch categories on component mount
-  useEffect(() => {
-    fetchCategoriesFromApi();
-  }, []);
   return (
     <div className={styles["categorybuttons"]}>
-      {categories.map((item) => {
+      {categories?.map((item) => {
         const selectedCategoryId = searchParams.get("categoryId");
         const isActive = item.id === selectedCategoryId;
-        console.log(searchParams.get("categoryId"));
+
         return (
           <button
             key={item.id}
             className={`${
               isActive
                 ? styles["active"]
-                : selectedCategoryId === null && item.id === "12345"
+                : selectedCategoryId === null && item.id === "all"
                 ? styles["active"]
                 : ""
             }`}
