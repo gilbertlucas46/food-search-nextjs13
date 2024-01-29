@@ -1,4 +1,4 @@
-import { Food, FoodProps, PromotionConfig } from "@/types";
+import { FoodProps, PromotionConfig } from "@/types";
 import React from "react";
 import {
   Card,
@@ -30,8 +30,9 @@ const Foods = ({ foods }: FoodProps) => {
   return (
     <>
       {foods ? (
-        foods.map((food) => {
+        foods.map((food, index) => {
           const {
+            id,
             rating,
             minCookTime,
             maxCookTime,
@@ -43,9 +44,11 @@ const Foods = ({ foods }: FoodProps) => {
           const cookTime = `${minCookTime}-${maxCookTime}`;
           const newRating = rating.toFixed(1);
           const { icon, content, cssClass } = getPromotionConfig(promotion);
+          // some items have similar id's so I combined id and index
+          const key = id + index;
 
           return (
-            <Card key={food.id}>
+            <Card key={key}>
               <CardContent>
                 <CardContentImage>
                   <Image

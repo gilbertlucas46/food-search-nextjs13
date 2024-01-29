@@ -9,11 +9,7 @@ import Spinner from "@/components/UI/Spinner";
 import { CardWrapper } from "@/components/UI/Card";
 import styles from "@/styles/card.module.scss";
 
-export async function ShowMore({
-  search,
-  initialFoods,
-  categoryId,
-}: ShowMoreProps) {
+export function ShowMore({ search, initialFoods, categoryId }: ShowMoreProps) {
   const [foods, setFoods] = useState(initialFoods);
   const [page, setPage] = useState(1);
 
@@ -27,6 +23,7 @@ export async function ShowMore({
         query: search,
         categoryId: categoryId, // Use the state variable here
       })) ?? [];
+    console.log(newFoodItems);
 
     setFoods((prevFoods: Food[]) => [...prevFoods, ...newFoodItems]);
     setPage(nextPage);
