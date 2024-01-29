@@ -2,7 +2,7 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import { useRouter, useSearchParams } from "next/navigation";
+import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { Category, FoodCategoryFilterProps } from "@/types";
 import useCreateQueryString from "@/components/Hooks/useCreateQueryString";
 import styles from "@/styles/categoryButtons.module.scss";
@@ -13,11 +13,13 @@ const FoodCategoryFilter = ({
 }: FoodCategoryFilterProps) => {
   const router = useRouter();
   const searchParams = useSearchParams();
+  const pathname = usePathname();
   const initialRender = useRef(true);
   const [selectedCategoryId, setSelectedCategoryId] = useState(
     categoryId || ""
   );
   const createQueryString = useCreateQueryString();
+  const current = new URLSearchParams(Array.from(searchParams.entries()));
 
   const allCategory = {
     id: "all",
@@ -35,13 +37,16 @@ const FoodCategoryFilter = ({
     }
 
     if (selectedCategoryId === "all") {
-      router.push(`/`);
+      current.delete("categoryId");
+      const search = current.toString();
+      const query = search ? `?${search}` : "";
+      router.push(`${pathname}${query}`);
     }
 
     if (selectedCategoryId && selectedCategoryId !== "all") {
       router.push(`/?${createQueryString("categoryId", selectedCategoryId)}`);
     }
-  }, [selectedCategoryId, createQueryString, router]);
+  }, [selectedCategoryId, createQueryString]);
 
   if (!categoryList) return;
   const categories = [allCategory, ...categoryList];
