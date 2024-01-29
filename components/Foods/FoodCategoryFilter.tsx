@@ -69,15 +69,16 @@ const FoodCategoryFilter = ({ categoryId }: FoodCategoryFilterProps) => {
   return (
     <div className={styles["categorybuttons"]}>
       {categories.map((item) => {
-        const isActive = item.id === searchParams.get("categoryId");
-
+        const selectedCategoryId = searchParams.get("categoryId");
+        const isActive = item.id === selectedCategoryId;
+        console.log(searchParams.get("categoryId"));
         return (
           <button
             key={item.id}
             className={`${
               isActive
                 ? styles["active"]
-                : !isActive && item.id === "12345"
+                : selectedCategoryId === null && item.id === "12345"
                 ? styles["active"]
                 : ""
             }`}
