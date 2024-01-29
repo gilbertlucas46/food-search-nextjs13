@@ -21,6 +21,7 @@ export interface ShowMoreProps {
   search: string | undefined;
   initialFoods: any; // Change 'any' to the actual type of initialFoods
   categoryId: string | undefined;
+  totalPages: number | undefined;
 }
 export interface FoodCategoryFilterProps {
   categoryId: string | undefined;
@@ -43,4 +44,11 @@ export interface PromotionConfig {
 }
 export interface FoodProps {
   foods: Food[] | null;
+}
+
+export interface QueryFoodResult {
+  data: Food[] | null;
+  totalPages: number;
+  loading: boolean;
+  error: Error | null;
 }

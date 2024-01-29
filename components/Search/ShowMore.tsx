@@ -1,41 +1,60 @@
 // components/ShowMore.tsx
 "use client";
-
-import { useState } from "react";
-import { Food, ShowMoreProps } from "@/types";
+import { useState, useEffect } from "react";
+import { Food, QueryFoodResult, ShowMoreProps } from "@/types";
 import Foods from "@/components/Foods/Foods";
 import { queryFood } from "@/app/actions/fetchFood";
 import Spinner from "@/components/UI/Spinner";
 import { CardWrapper } from "@/components/UI/Card";
 import styles from "@/styles/card.module.scss";
 
-export function ShowMore({ search, initialFoods, categoryId }: ShowMoreProps) {
+export function ShowMore({
+  search,
+  initialFoods,
+  totalPages,
+  categoryId,
+}: ShowMoreProps) {
   const [foods, setFoods] = useState(initialFoods);
   const [page, setPage] = useState(1);
+  const [maxPages, setMaxPages] = useState(totalPages);
 
   const ShowMoreFoods = async () => {
-    const nextPage = (page % 7) + 1;
-    const newFoodItems =
-      (await queryFood({
+    try {
+      // Use destructuring to get the data property from the result
+      const { data, totalPages } = (await queryFood({
         apiUrl: "https://run.mocky.io/v3/c75dc0d8-ad78-4b3d-b697-807a5ded8645",
-        page: nextPage,
+        page: page,
         perPage: 9,
         query: search,
-        categoryId: categoryId, // Use the state variable here
-      })) ?? [];
-    console.log(newFoodItems);
+        categoryId: categoryId,
+      })) ?? { data: null, totalPages: 0 };
 
-    setFoods((prevFoods: Food[]) => [...prevFoods, ...newFoodItems]);
-    setPage(nextPage);
+      console.log(data);
+
+      // Check if there's data
+      if (data) {
+        setFoods((prevFoods) => ({
+          ...prevFoods,
+          data: [...(prevFoods?.data || []), ...data],
+        }));
+        setPage(page + 1);
+        setMaxPages(totalPages);
+      }
+    } catch (error) {
+      console.error("Error fetching data", error);
+    }
   };
+  // console.log(foods, maxPages, page);
 
   return (
     <>
       <CardWrapper className={styles["cards__wrapper"]}>
-        <Foods foods={foods} />
+        <Foods foods={foods.data} />
       </CardWrapper>
       <Spinner />
-      <button onClick={() => ShowMoreFoods()}> show more</button>
+      {page < maxPages && (
+        <button onClick={() => ShowMoreFoods()}>Show More</button>
+      )}
     </>
   );
 }

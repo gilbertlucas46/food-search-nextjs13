@@ -36,6 +36,7 @@ export default async function Home({
         <FoodCategoryFilter categoryId={categoryId} />
         <ShowMore
           initialFoods={filteredFoods}
+          totalPages={filteredFoods.totalPages}
           search={search}
           categoryId={categoryId}
         />
