@@ -18,7 +18,6 @@ const FoodCategoryFilter = ({
     categoryId || ""
   );
   const createQueryString = useCreateQueryString();
-  const current = new URLSearchParams(Array.from(searchParams.entries()));
 
   const allCategory = {
     id: "all",
@@ -34,6 +33,7 @@ const FoodCategoryFilter = ({
       initialRender.current = false;
       return;
     }
+    const current = new URLSearchParams(Array.from(searchParams.entries()));
 
     if (selectedCategoryId === "all") {
       current.delete("categoryId");
@@ -45,7 +45,7 @@ const FoodCategoryFilter = ({
     if (selectedCategoryId && selectedCategoryId !== "all") {
       router.push(`/?${createQueryString("categoryId", selectedCategoryId)}`);
     }
-  }, [selectedCategoryId, createQueryString]);
+  }, [selectedCategoryId, createQueryString, pathname, router, searchParams]);
 
   if (!categoryList) return;
   const categories = [allCategory, ...categoryList];
