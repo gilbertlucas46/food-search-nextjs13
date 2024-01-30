@@ -49,8 +49,11 @@ export function ShowMore({
   };
 
   return (
-    <>
-      <CardWrapper className={cardStyles["cards__wrapper"]}>
+    <div data-testid="showmore-component">
+      <CardWrapper
+        className={cardStyles["cards__wrapper"]}
+        data-testid="foods-component"
+      >
         <Foods foods={foods.data} category={selectedCategory} search={search} />
       </CardWrapper>
       {maxPages !== undefined && page < maxPages && (
@@ -65,6 +68,6 @@ export function ShowMore({
           Show More
         </Button>
       )}
-    </>
+    </div>
   );
 }
