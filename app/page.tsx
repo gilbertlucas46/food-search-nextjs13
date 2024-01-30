@@ -20,25 +20,6 @@ export default async function Home({
       ? searchParams.categoryId
       : undefined;
 
-  // // Function to fetch categories from the API
-  // const fetchCategoriesFromApi = async () => {
-  //   const data = await fetchCategories({
-  //     apiUrl: "https://run.mocky.io/v3/b88ec762-2cb3-4015-8960-2839b06a7593",
-  //   });
-
-  //   if (data) {
-  //     // Add the new category to the existing categories
-  //     const allCategory = {
-  //       id: "all",
-  //       name: "All",
-  //     };
-
-  //     return [allCategory, ...data];
-  //   }
-
-  //   return [];
-  // };
-
   const categoryList = await fetchCategories({
     apiUrl: "https://run.mocky.io/v3/b88ec762-2cb3-4015-8960-2839b06a7593",
   });

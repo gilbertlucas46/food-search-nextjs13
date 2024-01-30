@@ -34,8 +34,8 @@ export async function queryFood(
       return matchesQuery && matchesCategory;
     });
 
-    // Calculate total pages based on the unfiltered data length and perPage
-    const totalPages = Math.ceil(data.foods.length / perPage);
+    // Calculate total pages based on the filtered data length and perPage
+    const totalPages = Math.ceil(filteredFoods.length / perPage);
 
     // Calculate start and end indices for pagination
     const startIndex = (page - 1) * perPage;
