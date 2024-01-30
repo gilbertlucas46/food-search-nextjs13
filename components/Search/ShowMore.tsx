@@ -1,12 +1,12 @@
-// components/ShowMore.tsx
 "use client";
 import { useState, useEffect } from "react";
 import { QueryFoodResult, ShowMoreProps } from "@/types";
 import Foods from "@/components/Foods/Foods";
 import { queryFood } from "@/app/actions/fetchFood";
-import Spinner from "@/components/UI/Spinner";
 import { CardWrapper } from "@/components/UI/Card";
-import styles from "@/styles/card.module.scss";
+import cardStyles from "@/styles/card.module.scss";
+import buttonStyles from "@/styles/buttons.module.scss";
+import { Button } from "@/components/UI/Buttons";
 
 export function ShowMore({
   search,
@@ -42,16 +42,23 @@ export function ShowMore({
       console.error("Error fetching data", error);
     }
   };
-  // console.log(foods, maxPages, page);
 
   return (
     <>
-      <CardWrapper className={styles["cards__wrapper"]}>
+      <CardWrapper className={cardStyles["cards__wrapper"]}>
         <Foods foods={foods.data} />
       </CardWrapper>
-      <Spinner />
       {maxPages !== undefined && page < maxPages && (
-        <button onClick={() => ShowMoreFoods()}>Show More</button>
+        <Button
+          className={[
+            buttonStyles["button--hollow"],
+            buttonStyles["button--yellow"],
+            buttonStyles["button--align-center"],
+          ].join(" ")}
+          onClick={() => ShowMoreFoods()}
+        >
+          Show More
+        </Button>
       )}
     </>
   );

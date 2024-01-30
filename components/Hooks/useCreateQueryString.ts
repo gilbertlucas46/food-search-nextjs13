@@ -1,4 +1,3 @@
-// hooks/useCreateQueryString.ts
 import { useCallback } from "react";
 import { useSearchParams } from "next/navigation";
 

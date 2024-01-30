@@ -1,0 +1,23 @@
+.button {
+    height: 44px;
+    padding: 16px 20px;
+    box-sizing: border-box;
+    display: flex;
+    align-items: center;
+    border-radius: var(--borderRadius);
+    transition: all 0.4s;
+    &--hollow {
+        background-color: transparent;
+    }
+    &--yellow {
+        border: 1px solid var(--yellow);
+        color: var(--gray-dark);
+        &:hover {
+            background-color: var(--yellow);
+            color: var(--white);
+        }
+    }
+    &--align-center {
+        margin: auto;
+    }
+}

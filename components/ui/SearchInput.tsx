@@ -1,4 +1,3 @@
-// components/UI/SearchInput.tsx
 import * as React from "react";
 import styles from "@/styles/searchInput.module.scss";
 
@@ -17,7 +16,12 @@ SearchInputWrapper.displayName = "SearchInputWrapper";
 // Use the SearchInputProps in the generic type
 const SearchInput = React.forwardRef<HTMLInputElement, SearchInputProps>(
   ({ className, ...props }, ref) => (
-    <input ref={ref} {...props} className={styles["search__input"]} />
+    <input
+      ref={ref}
+      {...props}
+      className={styles["search__input"]}
+      autoComplete="off"
+    />
   )
 );
 SearchInput.displayName = "SearchInput";

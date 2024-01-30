@@ -27,7 +27,7 @@ const FoodsSearch = ({ search }: { search?: string }) => {
     } else {
       router.push(`/?${createQueryString("search", query)}`);
     }
-  }, [query, createQueryString, router]);
+  }, [query, createQueryString]);
 
   return (
     <SearchInputWrapper>

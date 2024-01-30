@@ -1,9 +1,8 @@
-// components/Foods/FoodCategoryFilter.tsx
 "use client";
 
 import { useEffect, useRef, useState } from "react";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
-import { Category, FoodCategoryFilterProps } from "@/types";
+import { FoodCategoryFilterProps } from "@/types";
 import useCreateQueryString from "@/components/Hooks/useCreateQueryString";
 import styles from "@/styles/categoryButtons.module.scss";
 

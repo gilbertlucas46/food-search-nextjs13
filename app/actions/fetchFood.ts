@@ -1,4 +1,4 @@
-// app/actions/fetchFood.ts
+"use server";
 
 import { Food, QueryFoodOptions, QueryFoodResult } from "@/types/index";
 

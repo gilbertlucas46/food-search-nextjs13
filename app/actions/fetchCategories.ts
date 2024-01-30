@@ -1,4 +1,3 @@
-// app/actions/fetchCategories.ts
 "use server";
 
 import { Category, FetchCategoriesOptions } from "@/types/index";
