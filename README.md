@@ -1,13 +1,18 @@
+
 ## Getting Started
 
-First, run the development server:
+Open [Demo](https://food-search-nextjs14.vercel.app/) with your browser.
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+ 1. run the development server:
+`npm  install`
+
+ 2. Build files
+`npm  run build`
+
+ 2. Run Start
+`npm  run start`
+
+**Preview**
+
+ ![preview](https://github.com/gilbertlucas46/food-search-nextjs14/blob/develop/public/demo.gif)
+  
