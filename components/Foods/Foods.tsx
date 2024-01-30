@@ -14,6 +14,7 @@ import styles from "@/styles/card.module.scss";
 import { BsFillGiftFill } from "react-icons/bs";
 import Image from "next/image";
 import { FaStar } from "react-icons/fa";
+import NoMatch from "./NoMatch";
 
 const getPromotionConfig = (promotion: string): PromotionConfig => {
   const promotions: Record<string, PromotionConfig> = {
@@ -26,10 +27,10 @@ const getPromotionConfig = (promotion: string): PromotionConfig => {
   return promotions[promotion] || promotions.default;
 };
 
-const Foods = ({ foods }: FoodProps) => {
+const Foods = ({ foods, category, search }: FoodProps) => {
   return (
     <>
-      {foods ? (
+      {foods && foods.length > 0 ? (
         foods.map((food, index) => {
           const {
             id,
@@ -85,7 +86,7 @@ const Foods = ({ foods }: FoodProps) => {
           );
         })
       ) : (
-        <div>Nothing to display</div>
+        <NoMatch category={category} search={search} />
       )}
     </>
   );

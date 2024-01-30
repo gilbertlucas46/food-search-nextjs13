@@ -1,5 +1,5 @@
 .categorybuttons {
-    width: fit-content;
+    width: 100%;
     border: 1px solid var(--yellow);
     border-radius: var(--borderRadius);
     background-color: var(--white);
@@ -7,8 +7,10 @@
     display: flex;
     align-items: center;
     margin: 24px 0;
+    justify-content: space-between;
     @media (min-width:  768px) {
         margin: 44px 0;
+        width: fit-content;
     }
     .active {
         background-color: var(--yellow);
@@ -20,6 +22,17 @@
         padding: 16px 24px;
         transition: all 0.4s;
         cursor: pointer;
+        font-size: 12px;
+        @media (min-width: 320px) {
+            padding: 16px 6px;
+            font-size: 14px;
+        }
+        @media (min-width: 390px) {
+            padding: 16px 8px;
+        }
+        @media (min-width: 768px) {
+            padding: 16px 24px;
+        }
         &:hover {
             background-color: var(--yellow);
             color: var(--white);

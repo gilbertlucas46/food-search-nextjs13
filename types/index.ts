@@ -22,6 +22,7 @@ export interface ShowMoreProps {
   initialFoods: any; // Change 'any' to the actual type of initialFoods
   categoryId: string | undefined;
   totalPages: number | undefined;
+  categories: Category[] | null;
 }
 export interface FoodCategoryFilterProps {
   categoryId: string | undefined;
@@ -43,7 +44,12 @@ export interface PromotionConfig {
   content: string;
   cssClass: string;
 }
-export interface FoodProps {
+
+export interface NoMatchProps {
+  category: string | undefined;
+  search: string | undefined;
+}
+export interface FoodProps extends NoMatchProps {
   foods: Food[] | null;
 }
 

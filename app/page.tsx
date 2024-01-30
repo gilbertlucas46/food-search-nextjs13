@@ -48,6 +48,7 @@ export default async function Home({
           totalPages={filteredFoods.totalPages}
           search={search}
           categoryId={categoryId}
+          categories={categoryList}
         />
       </main>
     </div>

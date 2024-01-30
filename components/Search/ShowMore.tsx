@@ -13,10 +13,15 @@ export function ShowMore({
   initialFoods,
   totalPages,
   categoryId,
+  categories,
 }: ShowMoreProps) {
   const [foods, setFoods] = useState(initialFoods);
   const [page, setPage] = useState(1);
   const [maxPages, setMaxPages] = useState<number | undefined>(totalPages);
+
+  const selectedCategory = categories
+    ?.filter((category) => category.id === categoryId)
+    .map((item) => item.name)[0];
 
   const ShowMoreFoods = async () => {
     try {
@@ -46,7 +51,7 @@ export function ShowMore({
   return (
     <>
       <CardWrapper className={cardStyles["cards__wrapper"]}>
-        <Foods foods={foods.data} />
+        <Foods foods={foods.data} category={selectedCategory} search={search} />
       </CardWrapper>
       {maxPages !== undefined && page < maxPages && (
         <Button
